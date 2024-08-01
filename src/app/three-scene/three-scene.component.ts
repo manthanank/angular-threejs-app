@@ -7,6 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import * as THREE from 'three';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 @Component({
   selector: 'app-three-scene',
@@ -53,6 +55,27 @@ export class ThreeSceneComponent implements OnInit, AfterViewInit {
       1000
     );
     this.camera.position.z = 5;
+
+    // Load font and create text
+    const loader = new FontLoader();
+    loader.load(
+      'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
+      (font) => {
+        const textGeometry = new TextGeometry('Cube', {
+          font: font,
+          size: 0.5,
+          height: 0.1,
+        });
+        textGeometry.computeBoundingBox();
+        const boundingBox = textGeometry.boundingBox;
+        const textWidth = boundingBox ? boundingBox.max.x - boundingBox.min.x : 0;
+
+        const textMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+        textMesh.position.set(-textWidth / 2, 1.5, 0); // Center the text above the cube
+        this.scene.add(textMesh);
+      }
+    );
 
     // Create a cube with MeshPhongMaterial
     const geometry = new THREE.BoxGeometry(1, 1, 1);
