@@ -1,27 +1,80 @@
-# AngularThreejsApp
+# Angular Three.js Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+A basic Angular application that integrates Three.js to render a 3D scene with a rotating cube.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular framework
+- Three.js for 3D rendering
+- `npm i --save-dev @types/three` for TypeScript support
+- Basic lighting setup with directional and ambient lights
+- Rotating cube using `MeshPhongMaterial` for enhanced visual clarity
 
-## Code scaffolding
+## Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Before you begin, ensure you have met the following requirements:
 
-## Build
+- Node.js (>= 22.x)
+- npm (>= 10.x)
+- Angular CLI (>= 18.x)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Running unit tests
+1. **Clone the repository**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   ```bash
+   git clone https://github.com/manthanank/angular-threejs-app.git
+   cd angular-threejs-app
+   ```
 
-## Running end-to-end tests
+2. **Install dependencies**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   npm install
+   ```
 
-## Further help
+## Running the Application
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+To start the Angular development server and view the application:
+
+```bash
+ng serve
+```
+
+Navigate to `http://localhost:4200` in your browser to see the application in action. You should see a rotating 3D cube illuminated by both ambient and directional lights.
+
+## Project Structure
+
+- `src/app/three-scene/`
+  - `three-scene.component.ts`: Contains the logic for setting up the Three.js scene, lights, and cube.
+  - `three-scene.component.html`: Template for the component, which includes a canvas element.
+  - `three-scene.component.css`: Basic styling for the canvas element.
+  
+- `src/app/app.component.html`: Includes the `ThreeSceneComponent` to render it within the main application view.
+
+## Customization
+
+- **Change Cube Color**: Edit the `MeshPhongMaterial` color in `three-scene.component.ts` to change the color of the cube.
+  
+  ```typescript
+  const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+  ```
+
+- **Modify Lighting**: Adjust the intensity or position of the lights in the `createLights` method.
+
+  ```typescript
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(5, 5, 5).normalize();
+  ```
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any inquiries or issues, please contact [Manthan Ankolekar](mailto:manthan.ank46@gmail.com).
